@@ -1,50 +1,67 @@
 <?php
+    require_once('header.php');
     require_once('classes/tarefa.php');
-    if(isset($_POST['descricao']) && isset($_POST['titulo'])){
+    if($_POST['descricao']!='' && $_POST['titulo']!=''){
         $novo = new Tarefa();
         $novo->criar($_POST['titulo'],$_POST['descricao'],$_POST['id'],$_POST['status']);
         if($novo->salvar()){
             echo "<script>alert('tarefa cadastrado com sucesso')</script>";
         }
     }
+    ?>
+    <div class="jumbotron">
+        <div class="container"> 
+            <h3>
+                Cadastro de tarefas
+            </h3>
+        
+    <?php
     if($_GET['edit']==1){
         $infos = unserialize(base64_decode($_GET['task']));
+        $edit = TRUE;
+    }
         ?>
         <form action="tarefas.php" method="post">
-            <input type="hidden" name='id' value="<?=$infos->getId()?>"/>
-            <input type="text" placeholder="titulo" name="titulo" value="<?=$infos->getTitulo()?>"/>
-            <input type="textarea" placeholder="descricao" name="descricao" value="<?=$infos->getDescricao()?>"/>
-            <select name="status" index=<?=$infos->getStatus()?>>
-                <option value=0>Aberto</option>
-                <option value=1>Fechado</option>
-            </select>
-            <input type="submit" name="btn_enviar" value="Enviar"/>
+            <div class="form-group">
+                <input type="hidden" class="form-control" name='id' value="<?=($edit)? $infos->getId(): '' ?>"/>
+                <input type="text" placeholder="Titulo" class="form-control" name="titulo" value="<?=($edit)? $infos->getTitulo() : null ?>"/>
+            </div>
+            <div class="form-group">
+                <textarea type="textarea" placeholder="Descricao" class="form-control" name="descricao" value="<?=($edit)?$infos->getDescricao(): '' ?>"></textarea>
+            </div>
+            <div class="form-group"  <?=(!$edit)?'hidden':null?>> 
+                <label class="col-sm-4 col-form-label"> Status :</label>
+                <select name="status" class="form-control" index=<?=($edit)?$infos->getStatus(): 1 ?> >
+                    <option value=0>Aberto</option>
+                    <option value=1>Fechado</option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-outline-primary btn-block" name="btn_enviar" value="Salvar"/>
         </form>
+        <br/>
+    </div>
+    <div class="container">
+        <h4>
+            Tarefas cadastradas
+        </h4>
     <?php
-    }else{
-?>
-<form action="tarefas.php" method="post">
-    <input type="text" placeholder="titulo" name="titulo"/>
-    <input type="textarea" placeholder="descricao" name="descricao"/>
-    <input type="submit" name="btn_enviar" value="Enviar"/>
-</form>
-    <?php
-    }
         $tarefa = new Tarefa();
         $tarefas = $tarefa->getAllTarefas();
         if(!isset($tarefas  )){
             echo "Sem tarefas cadastradas";
         }  
         else{?>
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Titulo</th>
-                    <th>Descricao</th>
-                    <th>Status</th>
-                    <th>    </th>
-                </tr>
-            
+            <table class='table table-borderless table-hover'>
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Descricao</th>
+                        <th>Titulo</th>
+                        <th>Status</th>
+                        <th>    </th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
         <?php
             foreach ($tarefas as $task){
                 $edit=base64_encode(serialize($task));
@@ -53,8 +70,16 @@
                         <td>".$task->getTitulo()."</td>
                         <td>".$task->getDescricao()."</td>
                         <td>".$task->getStatus()."</td>
-                        <td><a href='tarefas.php?edit=1&task={$edit}'>editar </a></td>
+                        <td>
+                            <a href='tarefas.php?edit=1&task={$edit}'>
+                                <span class='badge badge-pill badge-dark'>editar</span>
+                            </a>
+                        </td>
                     </tr>";
             }
         }?>
-        </table>
+                </tbody>
+            </table>
+    </div>
+</div>
+<?php require_once('footer.php');
