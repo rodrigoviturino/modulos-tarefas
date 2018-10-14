@@ -9,7 +9,7 @@ class Tarefa{
     private $titulo;
     private $descricao;
     private $status;
-    private $log = [];
+    private $log;
 
     public function criar($titulo,$descricao,$id = null,$status = null,$log = null){
         $this->setId($id);
@@ -72,7 +72,7 @@ class Tarefa{
         if(isset($this->titulo)&& isset($this->descricao)){
             $database = new Database();
             if($this->id == null){
-                $sql = "insert into `tarefa`(`titulo`,`descricao`,`status`,`log`) 
+                $sql = "insert into `tarefas`(`titulo`,`descricao`,`status`,`log`) 
                     values ('{$this->titulo}','{$this->descricao}',{$this->status},'{$this->log}' )";
             }
             else{
