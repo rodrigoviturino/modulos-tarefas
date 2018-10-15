@@ -11,8 +11,10 @@ if($email!=''&& $senha != '') {
         $user = new Usuario();
         $cadastro_valido = $user->cadastrar_usuario($email, $senha, $status, $log);
         if($cadastro_valido){
-            echo "<script>alert('Deu Bom');</script>";
-            header('Location:index.php');
+            echo "<script>alert('Deu Bom');
+            window.location.href = 'login.php';
+            </script>";
+            
         }else{
                 echo "<script>alert('algo deu errado');</script>";
         }
