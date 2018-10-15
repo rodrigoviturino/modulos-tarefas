@@ -41,6 +41,6 @@ class Usuario
             $retorno = true;
         }
         return  $retorno;
-    
+   
     }
 }
