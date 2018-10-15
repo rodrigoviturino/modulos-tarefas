@@ -83,7 +83,7 @@
                         <td>".$task->getId()."</td>
                         <td>".$task->getTitulo()."</td>
                         <td>".$task->getDescricao()."</td>
-                        <td>".$task->getStatus()."</td>
+                        <td>".($task->getStatus()? 'Fechado': 'Aberto')."</td>
                         <td>
                             <a href='tarefas.php?edit=1&task={$edit}'>
                                 <span class='badge badge-pill badge-dark'>editar</span>

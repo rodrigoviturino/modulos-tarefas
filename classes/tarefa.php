@@ -18,6 +18,7 @@ class Tarefa{
         $this->setStatus($status ? $status: self::CHAMADO_ABERTO);
         if($log == null){
             //TODO: refatorar log;
+            //Mockado enquanto a autenticacao do usuario não ta pronta
             $log = array(
                     array(
                         "usuario"=>"user",
@@ -25,7 +26,7 @@ class Tarefa{
                         "data"=> date("Y-m-d H:i:s")
                     ));
         }
-        $this->setLog($log);    
+        $this->setLog($log);
     }
     public function setLog($log){
          if($this->log != null)
@@ -77,6 +78,7 @@ class Tarefa{
             }
             else{
                 //TODO: refatorar log;
+                //Mockado enquanto a autenticacao do usuario não ta pronta
                 $this->setLog(array(
                     "usuario"=>"user",
                     "alteracao"=> "editou o registro",
@@ -89,7 +91,7 @@ class Tarefa{
             if($database->executar($sql)===true){
                 $retorno = true;
             }
-            else echo $database->error.' '.$sql;
+            else echo $e->error.' '.$sql;
         }
         return $retorno;
     }
