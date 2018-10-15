@@ -1,3 +1,6 @@
+
+    <div class="jumbotron">
+        
 <?php
     require_once('header.php');
     require_once('classes/tarefa.php');
@@ -5,12 +8,23 @@
         $novo = new Tarefa();
         $novo->criar($_POST['titulo'],$_POST['descricao'],$_POST['id'],$_POST['status']);
         if($novo->salvar()){
-            echo "<script>alert('tarefa cadastrado com sucesso')</script>";
+            echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            <strong>Tarefa salva com sucesso!</strong>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>";
+        }else{
+            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <strong>Algo deu errado!</strong>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>";
         }
     }
     ?>
-    <div class="jumbotron">
-        <div class="container"> 
+    <div class="container"> 
             <h3>
                 Cadastro de tarefas
             </h3>
@@ -27,7 +41,7 @@
                 <input type="text" placeholder="Titulo" class="form-control" name="titulo" value="<?=($edit)? $infos->getTitulo() : null ?>"/>
             </div>
             <div class="form-group">
-                <textarea type="textarea" placeholder="Descricao" class="form-control" name="descricao" value="<?=($edit)?$infos->getDescricao(): '' ?>"></textarea>
+                <textarea type="textarea" placeholder="Descricao" class="form-control" name="descricao" ><?=($edit)?$infos->getDescricao(): '' ?></textarea>
             </div>
             <div class="form-group"  <?=(!$edit)?'hidden':null?>> 
                 <label class="col-sm-4 col-form-label"> Status :</label>
