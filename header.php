@@ -4,7 +4,7 @@
     <title>Page Title</title>
 </head>
 
-<style>
+<!--<style>
     form {
     
         width: 400px; 
@@ -16,7 +16,7 @@
         top: 30%;
          }
        
-</style>
+</style>-->
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -38,7 +38,7 @@
             </li>
         </ul>
     </nav>
-<?php
+<!--
 /* Sugestão:
     inserir toda a logica de autenticação do usuario no header, pois ele será chamado em todas as paginas;
-*/
+*/-->
