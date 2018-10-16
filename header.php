@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once('classes/usuario.php');
-
 if(!isset($_SESSION['logado'])){
    exit(header('location:login.php'));
 }
