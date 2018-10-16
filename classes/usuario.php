@@ -43,6 +43,8 @@ class Usuario
         return  $retorno;
    
     }
+
+
     public function autenticar_usuario($email = "", $pass = ""){
         $boolean = false;
 
@@ -64,5 +66,21 @@ class Usuario
         }
         return $boolean;
     }
+
+    public function getAllUsuarios(){
+        $query  = "SELECT * FROM `usuario`";
+        $database = new Database();
+        $result = $database->executar($query);
+        $usuarios = [];
+        if( $result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $usuario = array('email'=>$row['email'], 'senha'=>$row['senha'], 'status'=>$row['status'],'log'=>$row['log']);
+                $usuarios[] = $usuario;
+            }
+        }
+        return $usuarios;
+    }
+
+    
 
 }
