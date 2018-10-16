@@ -1,3 +1,24 @@
+<?php
+require_once('classes/usuario.php');
+
+if(!isset($_SESSION['logado'])){
+   exit(header('location:login.php'));
+}
+
+if(isset($_SESSION['usuario'])){
+   $email = $_SESSION['usuario'];
+}
+
+$logout = $_GET['logout'];
+
+if($logout == 1){
+   session_unset();
+   exit(header('location:login.php'));
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,3 +58,12 @@
 /* Sugestão:
     inserir toda a logica de autenticação do usuario no header, pois ele será chamado em todas as paginas;
 */-->
+<?php
+if(isset($_SESSION['usuario'])){
+
+    echo '<a href="./index.php?logout=1">Sair</a>';
+ 
+ }
+ 
+ ?>
+ 
