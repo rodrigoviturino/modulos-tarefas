@@ -44,13 +44,16 @@ if($logout == 1){
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Usuários</a>
+                <a class="nav-link" href="usuarios.php">Usuários</a>
             </li>
             <li class="nav-item active">
                     <a class="nav-link" href="tarefas.php">Tarefas</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="cadastro.php">Cadastrar</a>
+            </li>
+            <li class="nav-item active right-align">
+                <a class="nav-link" href="./index.php?logout=1">logout</a>
             </li>
         </ul>
     </nav>
