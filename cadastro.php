@@ -30,7 +30,7 @@ if($email!=''&& $senha != '') {
 <form method="post" class="" action="cadastro.php " >
     <div class="form-group"> 
     <label>E-mail</label><br/>
-    <input class="form-control" type="text" name="email"/><br/>
+    <input class="form-control" type="email" name="email"/><br/>
     <label>Senha</label><br/>
     <input type="password" class="form-control" name="senha"/><br/>
     <label>Confirmar Senha</label><br/>
