@@ -9,7 +9,6 @@
 </head>
 
 <?php
-    require_once('header.php');    
     if($_GET["erro"] == 171) {
         ?>
         <div class="alert alert-danger text-center" id="alert" role="alert">Usuário ou Senha inválida</div>
@@ -32,6 +31,7 @@
             <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha">
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+        <a href='cadastro.php'> Não tenho cadastro....</a>
         </form>
     </div>
 </body>

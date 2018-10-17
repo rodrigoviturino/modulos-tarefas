@@ -1,3 +1,24 @@
+<?php
+session_start();
+require_once('classes/usuario.php');
+if(!isset($_SESSION['logado'])){
+   exit(header('location:login.php'));
+}
+
+if(isset($_SESSION['usuario'])){
+   $email = $_SESSION['usuario'];
+}
+
+$logout = $_GET['logout'];
+
+if($logout == 1){
+   session_unset();
+   exit(header('location:login.php'));
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +40,11 @@
 </style>-->
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Usuários</a>
+                <a class="nav-link" href="usuarios.php">Usuários</a>
             </li>
             <li class="nav-item active">
                     <a class="nav-link" href="tarefas.php">Tarefas</a>
@@ -35,9 +52,21 @@
             <li class="nav-item active">
                 <a class="nav-link" href="cadastro.php">Cadastrar</a>
             </li>
+            <li class="nav-item active right-align">
+                <a class="nav-link" href="./index.php?logout=1">logout</a>
+            </li>
         </ul>
     </nav>
 <!--
 /* Sugestão:
     inserir toda a logica de autenticação do usuario no header, pois ele será chamado em todas as paginas;
 */-->
+<?php
+if(isset($_SESSION['usuario'])){
+
+    echo '<a href="./index.php?logout=1">Sair</a>';
+ 
+ }
+ 
+ ?>
+ 
