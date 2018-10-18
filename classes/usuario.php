@@ -9,11 +9,13 @@ private $log;
 private $id;
 
 public function setEmail($email){
-    $this->email;
+    $this->email = $email;    
 }
-public function getEmail($email){
-    $this->email;
+
+public function getEmail(){
+    return $this->email;
 }
+
 public function setSenha($senha){
     $this->senha;
 }
@@ -39,29 +41,31 @@ public function getId($id){
     $this->email;
 }
 
-public function cadastrar_usuario($email = "", $senha = "", $status = "", $log=""){
-    $retorno = false;
-    if($email == "" || $senha  == ""){
-        return false;
+    public function cadastrar_usuario($email = "", $senha = "", $status = "", $log=""){
+        $retorno = false;
+        if($email == "" || $senha  == ""){
+            return false;
+        }
+
+        $this->setEmail($email);
+        $this->setSenha($senha);
+        $this->setStatus($status);
+        $this->setLog($log);
+        
+    $database = new Database();
+
+    $criptografia = md5($senha);
+            
+        $sql = "INSERT INTO `usuario` (`id`, `email`, `senha`, `status`, `log`)
+            VALUES (NULL,'".$email."','".$criptografia."',0,'".$log."')";
+        $result = $database->executar($sql);
+
+    if($result === TRUE){
+        $retorno = true;
     }
+    return  $retorno;
 
-$this->setEmail($email);
-$this->setSenha($senha);
-$this->setStatus($status);
-$this->setLog($log);
-    
-$database = new Database();
-$criptografia = md5($senha);      
-$sql = "INSERT INTO `usuario` (`id`, `email`, `senha`, `status`, `log`)
-    VALUES (NULL,'".$email."','".$criptografia."',0,'".$log."')";
-$result = $database->executar($sql);
-
-if($result === TRUE){
-    $retorno = true;
-}
-return  $retorno;
-
-}
+    }
 
 
 public function autenticar_usuario($email = "", $pass = ""){
@@ -97,6 +101,7 @@ if( $result->num_rows > 0){
         $usuarios[] = $usuario;
     }
 }
+
 return $usuarios;
 }
 
@@ -107,4 +112,6 @@ if($id != ''){
     $sql = "UPDATE usuario SET senha ='".$criptografada."' WHERE id = ".$id;
     return ($database->executar($sql)===TRUE);
         
-}}}
+    }
+  }
+}
